@@ -178,3 +178,12 @@ export default ContextReducer;
 ```
 ![image](https://github.com/wlopera/react-study-reducer-context/assets/7141537/b69d2083-5a80-4dbe-8839-34937b8c58fa)
 
+En un ejemplo pequeño como éste, funciona bien, pero si tienes decenas o cientos de componentes en el medio, ¡pasar todo el estado y las funciones puede ser bastante frustrante!
+
+Por eso, como alternativa a pasarlas por props, podrías poner tanto el estado tasks como la función dispatch en el contexto. De esta manera, cualquier componente por debajo de TaskApp en el árbol puede leer las tareas y enviar acciones sin la «perforación de props» (o «prop drilling»).
+
+A continuación se explica cómo se puede combinar un reducer con el contexto:
+
+Crea el contexto.
+Pon el estado y la función dispatch en el contexto.
+Usa el contexto en cualquier parte del árbol.
