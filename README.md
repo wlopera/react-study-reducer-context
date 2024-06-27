@@ -438,7 +438,7 @@ export default ContextReducer;
 
 ```
 
-## Hooks personalizados (Custom Hooks)
+#### Hooks personalizados (Custom Hooks)
 
 Cuando un componente necesita leer el contexto, puede hacerlo a través de estas funciones:
   const tasks = useTasks();
@@ -450,3 +450,19 @@ Puedes pensar en TasksProvider como una parte de la pantalla que sabe cómo trat
 ## Misma Salida...
 
 ![image](https://github.com/wlopera/react-study-reducer-context/assets/7141537/3bb481df-c749-4de8-b287-7725337798db)
+
+
+## Hooks usarCallback
+* useCallbackes un Hook de React que te permite almacenar la definición de una función entre renderizados subsecuentes.
+
+Parámetros
+* fn: La función que deseas guardar en caché. Puede recibir cualquier argumento y devolver cualquier valor. React devolverá (¡no llamará!) tu función durante el renderizado inicial. En los renderizados subsecuentes, React devolverá la misma función nuevamente si las dependencias no han cambiado desde el último renderizado. Si no es así, React devolverá la función que pasaste durante el renderizado actual, y la almacenará en caso de que se necesite reutilizar más adelante. React no llamará a la función. La función se devolverá para que puedas decidir si y cuándo llamarla.
+
+* dependencias: La lista de todos los valores reactivos dentro de la función fn. Los valores reactivos incluyen props, estado y todas las variables y funciones declaradas directamente dentro del cuerpo de tu componente. Si tu linter está configurado para React, verificará que cada valor reactivo esté debidamente especificado como una dependencia. La lista de dependencias debe tener un número constante de elementos y estar escrita en línea, de la forma [dep1, dep2, dep3]. React comparará cada dependencia con su valor anterior usando el algoritmo de comparación Object.is.
+
+#### useMemo / useCallback
+La diferencia está en qué te permiten almacenar:
+
+* useMemo almacena el resultado de tu función. En este ejemplo, se almacena el resultado de computeRequirements(product) para que no cambie a menos que product cambie. Esto permite enviar el objeto requirements sin rerenderizar ShippingForm innecesariamente. Cuando realmente sea necesario, React llamará a la función durante el renderizado para calcular su resultado.
+
+* useCallback almacena la función en sí. A diferencia de useMemo, no llama a la función recibida. En su lugar, almacena la función que proporcionaste para que handleSubmit en sí no cambie a menos que productId o referrer cambien. Esto permite enviar la función handleSubmit sin rerenderizar ShippingForm innecesariamente. Tu código no se llamará hasta que el usuario envíe el formulario.
