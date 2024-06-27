@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { TaskDispatchContext } from "./Context";
+import React, { useState } from "react";
+import { useTasksDispatch } from "./TaskContext";
 
 import styles from "./ContextReducer.module.css";
 
@@ -7,7 +7,7 @@ let nextId = 3;
 
 const AddTask = () => {
   const [text, setText] = useState("");
-  const dispatch = useContext(TaskDispatchContext);
+  const dispatch = useTasksDispatch();
 
   const handleAddTask = () => {
     if (text.trim().length === 0) {

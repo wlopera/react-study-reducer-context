@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
 import styles from "./ContextReducer.module.css";
-import { TaskDispatchContext } from "./Context";
+import { useTasksDispatch } from "./TaskContext";
 
 const Task = ({ task }) => {
   const [isEditabled, setIsEditabled] = useState(false);
 
-  const dispatch = useContext(TaskDispatchContext);
+  const dispatch = useTasksDispatch();
 
   const handleModifyTask = (task) => {
     dispatch({
