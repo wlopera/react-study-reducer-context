@@ -466,3 +466,28 @@ La diferencia está en qué te permiten almacenar:
 * useMemo almacena el resultado de tu función. En este ejemplo, se almacena el resultado de computeRequirements(product) para que no cambie a menos que product cambie. Esto permite enviar el objeto requirements sin rerenderizar ShippingForm innecesariamente. Cuando realmente sea necesario, React llamará a la función durante el renderizado para calcular su resultado.
 
 * useCallback almacena la función en sí. A diferencia de useMemo, no llama a la función recibida. En su lugar, almacena la función que proporcionaste para que handleSubmit en sí no cambie a menos que productId o referrer cambien. Esto permite enviar la función handleSubmit sin rerenderizar ShippingForm innecesariamente. Tu código no se llamará hasta que el usuario envíe el formulario.
+
+```
+import { useMemo, useCallback } from 'react';
+
+function ProductPage({ productId, referrer }) {
+  const product = useData('/product/' + productId);
+
+  const requirements = useMemo(() => { // Llama a la función y almacena su resultado
+    return computeRequirements(product);
+  }, [product]);
+
+  const handleSubmit = useCallback((orderDetails) => { // Almacena la función como tal
+    post('/product/' + productId + '/buy', {
+      referrer,
+      orderDetails,
+    });
+  }, [productId, referrer]);
+
+  return (
+    <div className={theme}>
+      <ShippingForm requirements={requirements} onSubmit={handleSubmit} />
+    </div>
+  );
+}
+```
