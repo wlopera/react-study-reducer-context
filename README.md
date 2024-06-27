@@ -491,3 +491,11 @@ function ProductPage({ productId, referrer }) {
   );
 }
 ```
+
+#### Buena Practica:
+```
+// Implementación simplificada (dentro de React)
+function useCallback(fn, dependencies) {
+  return useMemo(() => fn, dependencies);
+}
+```
