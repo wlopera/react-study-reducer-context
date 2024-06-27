@@ -82,6 +82,15 @@ export default ContextReducer;
 
 Un reducer ayuda a mantener los controladores de eventos cortos y concisos. Sin embargo, a medida que tu aplicación crece, puedes encontrarte con otra dificultad. Actualmente, el estado tasks y la función dispatch sólo están disponibles en el componente de nivel superior TaskApp. Para permitir que otros componentes lean la lista de tareas o la modifiquen, tienes que pasar explícitamente el estado actual y los controladores de eventos que lo cambian como props.
 
+Para proporcionar estado y la función dispatch a los componentes de abajo:
+  * Crea dos contextos (para el estado y para las funciones dispatch).
+  * Proporciona ambos contextos y asociarlos al reducer.
+  * Utiliza cualquiera de los dos contextos desde los componentes que necesiten leerlos.
+  * Puedes refactorizar aún más los componentes moviendo todo la lógica a un solo archivo o en archivos separados.
+  * Puedes exportar un componente como TasksProvider que proporciona el contexto.
+  * También puedes exportar Hooks personalizados como useTasks y useTasksDispatch para leerlo.
+
+
 #### TaskReducer.js
 ```
 export default function tasksReducer(tasks, action) {
@@ -429,10 +438,15 @@ export default ContextReducer;
 
 ```
 
+## Hooks personalizados (Custom Hooks)
+
 Cuando un componente necesita leer el contexto, puede hacerlo a través de estas funciones:
   const tasks = useTasks();
   const dispatch = useTasksDispatch();
 Actualizar otros componentes
 
+Puedes pensar en TasksProvider como una parte de la pantalla que sabe cómo tratar con las tareas, useTasks como una forma de leerlas, y useTasksDispatch como una forma de actualizarlas desde cualquier componente de abajo en el árbol.
+
 ## Misma Salida...
 
+![image](https://github.com/wlopera/react-study-reducer-context/assets/7141537/3bb481df-c749-4de8-b287-7725337798db)
