@@ -362,3 +362,64 @@ export default Task;
 ```
 ![image](https://github.com/wlopera/react-study-reducer-context/assets/7141537/8cff758d-2425-4c49-a543-b629362b384e)
 
+## Modificar el código para hacerlo mas fácil y mejor de entender y actualizar
+
+### Cambiar Context.js ==> TaskContext.js
+```
+import { createContext, useReducer } from "react";
+
+import tasksReducer from "./TasksReducer";
+
+//  Lista actual de tareas.
+export const TaskContext = createContext(null);
+
+// Función que permite a los componentes enviar acciones.
+export const TaskDispatchContext = createContext(null);
+
+const initialTasks = [
+  { id: 0, text: "El Camino del Filósofo", done: true },
+  { id: 1, text: "Visitar el Templo", done: false },
+  { id: 2, text: "Don Quijote de la Mancha", done: false },
+];
+
+export function TaskProvider({ children }) {
+  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+
+  return (
+    <TaskContext.Provider value={tasks}>
+      <TaskDispatchContext.Provider value={dispatch}>
+        {children}
+      </TaskDispatchContext.Provider>
+    </TaskContext.Provider>
+  );
+}
+
+```
+
+### ContextReducer.js
+```
+import React, { useState, useReducer } from "react";
+import AddTask from "./AddTask";
+import TaskList from "./TaskList";
+
+import styles from "./ContextReducer.module.css";
+import { TaskProvider } from "./TaskContext";
+
+const ContextReducer = () => {
+  return (
+    <TaskProvider>
+      <div className={styles.container}>
+        <h2>Libros de Colección</h2>
+        <AddTask />
+        <TaskList />
+      </div>
+    </TaskProvider>
+  );
+};
+
+export default ContextReducer;
+
+```
+
+## Misma Salida...
+
