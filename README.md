@@ -499,3 +499,10 @@ function useCallback(fn, dependencies) {
   return useMemo(() => fn, dependencies);
 }
 ```
+
+### Almacenar una función con useCallback solo es beneficioso en unos pocos casos:
+
+* Al enviarla como prop al componente envuelto en memo. Querrás omitir el renderizado subsecuente si el valor no ha cambiado. La memoización permite que tu componente se renderice nuevamente solo cuando las dependencias no sean las mismas.
+  
+*  La función que estás enviando se usa más tarde como una dependencia de algún Hook. Por ejemplo, cuando otra función envuelta en useCallback depende de ella, o cuando dependes de dicha función desde useEffect.
+
