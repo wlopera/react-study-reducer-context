@@ -1,9 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import styles from "./ContextReducer.module.css";
+import { TaskDispatchContext } from "./Context";
 
-const Task = ({ task, onChangeTask, onDeleteTask }) => {
+const Task = ({ task }) => {
   const [isEditabled, setIsEditabled] = useState(false);
+
+  const dispatch = useContext(TaskDispatchContext);
+
+  const handleModifyTask = (task) => {
+    dispatch({
+      type: "changed",
+      ...task,
+    });
+  };
+
+  const handleDeleteTask = (id) => {
+    dispatch({
+      type: "delete",
+      id,
+    });
+  };
 
   const taskContext = isEditabled ? (
     <>
@@ -11,7 +28,7 @@ const Task = ({ task, onChangeTask, onDeleteTask }) => {
         value={task.text}
         className={styles.taskInput}
         onChange={(e) =>
-          onChangeTask({
+          handleModifyTask({
             ...task,
             text: e.target.value,
           })
@@ -42,7 +59,7 @@ const Task = ({ task, onChangeTask, onDeleteTask }) => {
         type="checkbox"
         checked={task.done}
         onChange={(e) =>
-          onChangeTask({
+          handleModifyTask({
             ...task,
             done: e.target.checked,
           })
@@ -51,7 +68,7 @@ const Task = ({ task, onChangeTask, onDeleteTask }) => {
       />
       {taskContext}
       <button
-        onClick={() => onDeleteTask(task.id)}
+        onClick={() => handleDeleteTask(task.id)}
         className={styles.buttonDelete}
       >
         Borrar
