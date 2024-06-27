@@ -394,6 +394,14 @@ export function TaskProvider({ children }) {
   );
 }
 
+// Exportar funciones que utilicen el contexto
+export function useTasks() {
+  return useContext(TasksContext);
+}
+
+export function useTasksDispatch() {
+  return useContext(TasksDispatchContext);
+}
 ```
 
 ### ContextReducer.js
@@ -420,6 +428,11 @@ const ContextReducer = () => {
 export default ContextReducer;
 
 ```
+
+Cuando un componente necesita leer el contexto, puede hacerlo a través de estas funciones:
+  const tasks = useTasks();
+  const dispatch = useTasksDispatch();
+Actualizar otros componentes
 
 ## Misma Salida...
 
