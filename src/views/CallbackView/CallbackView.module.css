@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    border: 2px solid black;
+    flex-direction: column;
+}
+
+.dark{
+    background-color: black;
+    color: white;
+    margin: 20px;
+}
+
+.light{
+    background-color: lightgreen;
+    color: black;
+    margin: 20px;
+}
+
+.productForm { 
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    width: 22vw;
+    height: 30vh;
+    border: 1px solid black;
+    flex-direction: column;
+}
+
+.count{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin-left: 10px;
+}
+
+.form{
+    margin-top: 20px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
